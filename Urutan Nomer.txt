@@ -1,0 +1,12 @@
+1. Membuat Database
+2. Membuat Tabel
+3. Mengisi data pada tabel
+4. Mengambil data dari tabel
+5. Mengubah data di tabel
+6. Menghapus data di tabel
+7. Menghapus Tabel
+8. Menghapus Database
+9. 1 Pelanggan membeli 3 barang berbeda
+10. Melihat 3 produk yang paling sering dibeli
+11. Melihat kategori barang yang paling banyak barangnya (stok)
+12. Nominal rata rata transaksi 1 bulan terakhir (misal Bulan Desember)

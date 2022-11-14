@@ -1,0 +1,168 @@
+1. Membuat Database
+CREATE DATABASE `onlineshop`;
+
+2. Membuat Tabel
+///Create table supplier
+CREATE TABLE `supplier` (
+  `kodeSupplier` varchar(5) NOT NULL PRIMARY KEY,
+  `namaSupplier` varchar(20) NOT NULL,
+  `alamatSupplier` varchar(30) NOT NULL,
+  `noTelpSupplier` varchar(13) NOT NULL
+);
+
+//Create table barang
+CREATE TABLE `barang` (
+  `kodeBarang` varchar(5) NOT NULL PRIMARY KEY,
+  `kategori` varchar(10) NOT NULL,
+  `namaBarang` varchar(20) NOT NULL,
+  `kodeSupplier` varchar(5) NOT NULL,
+  `harga` int(11) NOT NULL,
+  `stok` int(11) NOT NULL,
+  `sold` int(11) NOT NULL
+);
+
+//Create Table Pembeli
+CREATE TABLE `pembeli` (
+  `kodePembeli` varchar(5) NOT NULL PRIMARY KEY,
+  `namaPembeli` varchar(20) NOT NULL,
+  `alamatPembeli` varchar(30) NOT NULL,
+  `noTelpPembeli` varchar(13) NOT NULL
+);
+
+//Create Table DetailTransaksi
+CREATE TABLE `detailtransaksi` ( 
+	`kodeTransaksi` varchar(5) NOT NULL, 
+	`kodeBarang` varchar(5) NOT NULL, 
+	`kodePembeli` varchar(5) NOT NULL, 
+	`jumlah` int(11) NOT NULL, 
+	`total` int(11) NOT NULL 
+);
+
+//Create Table faktur
+CREATE TABLE `faktur` (
+  `kodeTransaksi` varchar(5) NOT NULL PRIMARY KEY,
+  `grandTotal` int(11) NOT NULL,
+  `tanggal` DATE NOT NULL
+);
+
+
+3. Mengisi Data ke tabel
+///insert Barang
+INSERT INTO `barang` (`kodeBarang`, `kategori`, `namaBarang`, `kodeSupplier`, `harga`, `stok`, `sold`) VALUES 
+('BA001', 'gorengan', 'Pisang Goreng', 'SU001', '2000', '200', '0'), 
+('BA002', 'gorengan', 'Tahu Isi', 'SU002', '1500', '300', '0'), 
+('BA003', 'makanan', 'Ayam Geprek', 'SU001', '15000', '97', '3'), 
+('BA004', 'gorengan', 'Tempe Goreng', 'SU003', '1000', '198', '2'),
+('BA005', 'gorengan', 'Tahu Goreng', 'SU003', '1000', '88', '12'), 
+('BA006', 'gorengan', 'Sate Usus', 'SU004', '2000', '197', '3'),
+('BA007', 'gorengan', 'Sate Kulit', 'SU004', '2000', '147', '3'), 
+('BA008', 'makanan', 'Nasi Putih', 'SU005', '5000', '197', '3'),
+('BA009', 'makanan', 'Nasi Uduk', 'SU006', '5000', '99', '1'), 
+('BA010', 'pelengkap', 'Kerupuk', 'SU007', '500', '288', '12'),
+('BA011', 'minuman', 'Es Teh', 'SU008', '3000', '96', '4'), 
+('BA012', 'minuman', 'Es Jeruk', 'SU009', '3500', '96', '4'),
+('BA013', 'pelengkap', 'Sambel', 'SU010', '1000', '186', '14'), 
+('BA014', 'pelengkap', 'Timun', 'SU010', '1000', '100', '0'), 
+('BA015', 'pelengkap', 'Lalapan', 'SU010', '2000', '95', '5');
+
+///Insert Supplier
+INSERT INTO `supplier` (`kodeSupplier`, `namaSupplier`, `alamatSupplier`, `noTelpSupplier`) VALUES 
+('SU001', 'Ibu Atiek', 'Jl. Anjasmara 12', '08123123121'), 
+('SU002', 'Ibu Budiarti', 'Jl. Bengawan 71', '08123123122'), 
+('SU003', 'Bapak Catur', 'Jl. Cendana 42', '08123123123'), 
+('SU004', 'Bapak Dodik', 'Jl. Darmawangsa 11', '08123123124'), 
+('SU005', 'Ibu Erni', 'Jl. Elok 91', '08123123125'), 
+('SU006', 'Ibu Fiona', 'Jl. Fengshui 56', '08123123126'), 
+('SU007', 'Bapak Gianto', 'Jl. Gatot Subroto 1', '08123123127'), 
+('SU008', 'Bapak Harto', 'Jl. Hasyim 62', '08123123128'), 
+('SU009', 'Ibu Indah', 'Jl. Ikan Mas 22', '08123123129'), 
+('SU010', 'Bapak Junaedi', 'Jl, Jatinegara 77', '08123123130');
+
+///Insert Pembeli
+INSERT INTO `pembeli` (`kodePembeli`, `namaPembeli`, `alamatPembeli`, `noTelpPembeli`) VALUES 
+('PE001', 'Anton Shareloc', 'Jl. Anggrek 7', '08321123121'), 
+('PE002', 'Bambang Marley', 'Jl. Batu Gunung 83', '08321123122'), 
+('PE003', 'Cecep Hemsworth', 'Jl. Cikini 77', '08321123123'), 
+('PE004', 'Denise Lipa', 'Jl. Diponegoro 99', '08321123124'), 
+('PE005', 'Edi Sheeran', 'Jl. Ekonomi 43', '08321123125'), 
+('PE006 ', 'Firman Mercury', 'Jl. Fatahilah 44', '08321123126'), 
+('PE007', 'Guntur Ramsey', 'Jl. Gorontalo 34', '08321123127'), 
+('PE008', 'Heri Potter', 'Jl. Hasanudin 73', '08321123128'), 
+('PE009', 'Ikhsan Newton', 'Jl. Indramayu 982', '08321123129'), 
+('PE010', 'Jaki Bieber', 'Jl. Jamaludin 45', '08321123130');
+
+//Insert Detail Transaksi
+INSERT INTO `detailtransaksi` (`kodeTransaksi`, `kodeBarang`, `kodePembeli`, `jumlah`, `total`) VALUES 
+('TR001', 'BA003', 'PE005', '2', '30000'), 
+('TR002', 'BA008', 'PE010', '3', '15000'), 
+('TR003', 'BA006', 'PE006', '3', '6000'), 
+('TR004', 'BA007', 'PE001', '3', '6000'), 
+('TR004', 'BA015', 'PE001', '5', '10000'), 
+('TR005', 'BA011', 'PE007', '4', '12000'), 
+('TR006', 'BA012', 'PE008', '4', '14000'), 
+('TR007', 'BA009', 'PE004', '1', '5000'), 
+('TR007', 'BA003', 'PE004', '1', '15000'), 
+('TR008', 'BA010', 'PE009', '12', '6000'), 
+('TR009', 'BA005', 'PE003', '10', '10000'), 
+('TR010', 'BA013', 'PE001', '12', '12000'), 
+('TR011', 'BA004', 'PE002', '2', '2000'), 
+('TR011', 'BA005', 'PE002', '2', '2000'), 
+('TR011', 'BA013', 'PE002', '2', '2000');
+
+//Insert Faktur
+INSERT INTO `faktur` (`kodeTransaksi`, `grandTotal`, `tanggal`) VALUES 
+('TR001', '30000', '2022-10-29'), 
+('TR002', '15000', '2022-11-12'), 
+('TR003', '6000', '2022-11-16'), 
+('TR004', '16000', '2022-11-22'), 
+('TR005', '12000', '2022-11-28'), 
+('TR006', '14000', '2022-12-01'), 
+('TR007', '20000', '2022-12-04'), 
+('TR008', '6000', '2022-12-07'), 
+('TR009', '10000', '2022-12-10'), 
+('TR010', '12000', '2022-12-13'), 
+('TR011', '6000', '2022-12-18');
+
+
+4. Mengambil data dari tabel
+SELECT * FROM barang;
+
+5. Mengubah data di tabel
+UPDATE barang
+SET stok = 100
+WHERE kodeBarang = `BA001`;
+
+6. Menghapus data di tabel
+DELETE FROM pembeli
+WHERE kodePembeli = `PE010`;
+
+7. Menghapus tabel
+DROP TABLE barang;
+
+8. Menghapus Database
+DROP DATABASE onlineshop;
+
+9. 1 pelanggan membeli 3 barang berbeda
+SELECT kodePembeli, kodeTransaksi, COUNT(kodeTransaksi) as jumlah
+FROM detailtransaksi
+GROUP BY kodeTransaksi
+HAVING COUNT(kodeTransaksi) > 2;
+
+10. Melihat 3 produk paling sering dibeli
+SELECT kodeBarang, SUM(jumlah) as jumlahBeli
+FROM detailtransaksi 
+GROUP BY kodeBarang 
+ORDER BY SUM(jumlah) DESC 
+LIMIT 3;
+
+11. Melihat kategori barang yang paling banyak barangnya
+SELECT kategori, SUM(stok) as totalStok
+FROM barang
+GROUP BY kategori
+ORDER BY SUM(stok) DESC
+LIMIT 1;
+
+12. Nominal rata rata transaksi 1 bulan terakhir
+SELECT SUM(grandTotal)/COUNT(DISTINCT (kodeTransaksi)) as Rataan
+FROM faktur
+WHERE MONTH(tanggal) = 12;
